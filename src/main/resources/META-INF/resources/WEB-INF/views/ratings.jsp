@@ -11,35 +11,41 @@
 </head>
 <body>
 <div class="container width-container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center p-3">
         <h3 class="title">Список рейтингов</h3>
     </div>
-    <div><a href="/rating/create/">Создать</a></div>
+
+    <div class="d-flex justify-content-center">
+        <div class="p-3"><a class="btn btn-primary" href="/rating/create/">Создать</a></div>
+        <div class="p-3"><a class="btn btn-primary" href="/category/">Список категорий</a></div>
+        <div class="p-3"><a class="btn btn-primary" href="/company/">Список компаний</a></div>
+        <div class="p-3"><a class="btn btn-primary" href="/service/">Список услуг</a></div>
+    </div>
     <div class="d-flex mb-3 btn_box">
         <table>
-            <tr>
-                <th>Рейтинг</th>
-                <th>Категория</th>
-                <th>Организация</th>
-                <th>Услуга</th>
-                <th>Комментарий</th>
-                <th>Дата создания</th>
-                <th>Действия</th>
+            <tr class="overflow-hidden">
+                <th class="col p-3">Рейтинг</th>
+                <th class="col p-3">Категория</th>
+                <th class="col p-3">Организация</th>
+                <th class="col p-3">Услуга</th>
+                <th class="col p-3">Комментарий</th>
+                <th class="col p-3">Дата создания</th>
+                <th class="col p-3">Действия</th>
             </tr>
             <c:forEach items="${ratings}" var="rating">
-                <tr>
-                    <td>${ratingValues.get(rating.rating)}</td>
-                    <td>${rating.category.name}</td>
-                    <td>${rating.company.name}</td>
-                    <td>${rating.onlineService.name}</td>
-                    <td>${rating.comment}</td>
-                    <td>${rating.creationDate}</td>
-                    <td>
+                <tr class="overflow-hidden">
+                    <td class="col p-3">${ratingValues.get(rating.rating)}</td>
+                    <td class="col p-3">${rating.category.name}</td>
+                    <td class="col p-3">${rating.company.name}</td>
+                    <td class="col p-3">${rating.onlineService.name}</td>
+                    <td class="col p-3">${rating.comment}</td>
+                    <td class="col p-3">${rating.creationDate}</td>
+                    <td  class="col p-3">
                         <form method="GET" action="/rating/${rating.id}">
-                            <input type="submit" value="Редактировать">
+                            <input class="btn btn-primary btn-sm" type="submit" value="Редактировать">
                         </form>
                         <form method="POST" action="/rating/delete/${rating.id}">
-                            <input type="submit" value="Удалить">
+                            <input class="btn btn-primary btn-sm" type="submit" value="Удалить">
                         </form>
                     </td>
                 </tr>

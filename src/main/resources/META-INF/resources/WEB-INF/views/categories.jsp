@@ -11,25 +11,25 @@
 </head>
 <body>
 <div class="container width-container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center p-3">
         <h3 class="title">Список категорий</h3>
     </div>
-    <div><a href="/category/create/">Создать</a></div>
-    <div class="d-flex mb-3 btn_box">
+    <div class="d-flex justify-content-center p-3"><a class="btn btn-primary" href="/category/create/">Создать</a></div>
+    <div class="d-flex justify-content-center">
         <table>
-            <tr>
-                <th>Наименование</th>
-                <th>Действия</th>
+            <tr class="overflow-hidden">
+                <th class="col p-3">Наименование</th>
+                <th class="col p-3">Действия</th>
             </tr>
             <c:forEach items="${categories}" var="category">
-                <tr>
-                    <td>${category.name}</td>
-                    <td>
+                <tr class="overflow-hidden">
+                    <td class="col p-3">${category.name}</td>
+                    <td class="col p-3">
                         <form method="GET" action="/category/${category.id}">
-                            <input type="submit" value="Редактировать">
+                            <input class="btn btn-primary btn-sm" type="submit" value="Редактировать">
                         </form>
                         <form method="POST" action="/category/delete/${category.id}">
-                            <input type="submit" value="Удалить">
+                            <input class="btn btn-primary btn-sm" type="submit" value="Удалить">
                         </form>
                     </td>
                 </tr>

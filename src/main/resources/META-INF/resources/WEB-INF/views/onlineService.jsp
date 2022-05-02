@@ -11,26 +11,28 @@
 </head>
 <body>
 <div class="container width-container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center p-3">
         <h3 class="title">Услуга</h3>
     </div>
-    <div><a href="/service/">Список</a></div>
-    <div class="d-flex mb-3 btn_box">
+    <div class="d-flex justify-content-center p-3">
         <form method="post" action="/service/">
-            <div>
-                <input type="hidden" name="id" value="${onlineService != null && onlineService.id != null ? onlineService.id : ''}">
-                <label>Наименование
-                    <input type="text" name="name" value="${onlineService != null && onlineService.name  != null ? onlineService.name : ''}">
-                </label>
+            <div class="col p-3">
+                <input type="hidden" name="id"
+                       value="${onlineService != null && onlineService.id != null ? onlineService.id : ''}">
+                <div>Наименование</div>
+                <input type="text" name="name"
+                       value="${onlineService != null && onlineService.name  != null ? onlineService.name : ''}">
+            </div>
+            <div class="col p-3">
+                <input type="hidden" name="id"
+                       value="${onlineService != null && onlineService.id != null ? onlineService.id : ''}">
+                <div>Код</div>
+                <input type="text" name="code"
+                       value="${onlineService != null && onlineService.code  != null ? onlineService.code : ''}">
             </div>
             <div>
-                <input type="hidden" name="id" value="${onlineService != null && onlineService.id != null ? onlineService.id : ''}">
-                <label>Код
-                    <input type="text" name="code" value="${onlineService != null && onlineService.code  != null ? onlineService.code : ''}">
-                </label>
-            </div>
-            <div>
-                <input type="submit" class="btn btn-primary" value="Сохранить">
+                <input type="submit" class="btn btn-primary m-1" value="Сохранить">
+                <a class="btn btn-primary" href="/service/">Список</a>
             </div>
         </form>
     </div>

@@ -11,25 +11,25 @@
 </head>
 <body>
 <div class="container width-container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center p-3">
         <h3 class="title">Компания</h3>
     </div>
-    <div><a href="/company/">Список</a></div>
-    <div class="d-flex mb-3 btn_box">
+    <div class="d-flex mb-3 btn_box justify-content-center">
         <form method="post" action="/company/">
-            <div>
+            <div class="p-3">
                 <input type="hidden" name="id" value="${company != null && company.id != null ? company.id : ''}">
-                <label>Наименование
-                    <input type="text" name="name" value="${company != null && company.name  != null ? company.name : ''}">
-                </label>
+                <div>Наименование</div>
+                <input class="col form-control" type="text" name="name"
+                       value="${company != null && company.name  != null ? company.name : ''}">
+            </div>
+            <div class="p-3">
+                <div>УНН</div>
+                <input class="col form-control" type="text" name="unn"
+                       value="${company != null && company.unn  != null ? company.unn : ''}">
             </div>
             <div>
-               <label>УНН
-                    <input type="text" name="unn" value="${company != null && company.unn  != null ? company.unn : ''}">
-                </label>
-            </div>
-            <div>
-                <input type="submit" class="btn btn-primary" value="Сохранить">
+                <input type="submit" class="btn btn-primary m-1" value="Сохранить">
+                <a class="btn btn-primary" href="/company/">Список</a>
             </div>
         </form>
     </div>

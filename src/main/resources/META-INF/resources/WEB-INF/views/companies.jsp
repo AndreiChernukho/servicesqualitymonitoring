@@ -11,27 +11,27 @@
 </head>
 <body>
 <div class="container width-container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center p-3">
         <h3 class="title">Список компаний</h3>
     </div>
-    <div><a href="/company/create/">Создать</a></div>
-    <div class="d-flex mb-3 btn_box">
+    <div class="d-flex justify-content-center"><a class="btn btn-primary" href="/company/create/">Создать</a></div>
+    <div class="d-flex justify-content-center">
         <table>
-            <tr>
-                <th>Наименование</th>
-                <th>УНН</th>
-                <th>Действия</th>
+            <tr class="overflow-hidden">
+                <th class="col p-3">Наименование</th>
+                <th class="col p-3">УНН</th>
+                <th class="col p-3">Действия</th>
             </tr>
             <c:forEach items="${companies}" var="company">
-                <tr>
-                    <td>${company.name}</td>
-                    <td>${company.unn}</td>
-                    <td>
+                <tr class="overflow-hidden">
+                    <td class="col p-3">${company.name}</td>
+                    <td class="col p-3">${company.unn}</td>
+                    <td class="col p-3">
                         <form method="GET" action="/company/${company.id}">
-                            <input type="submit" value="Редактировать">
+                            <input class="btn btn-primary btn-sm" type="submit" value="Редактировать">
                         </form>
                         <form method="POST" action="/company/delete/${company.id}">
-                            <input type="submit" value="Удалить">
+                            <input class="btn btn-primary btn-sm" type="submit" value="Удалить">
                         </form>
                     </td>
                 </tr>

@@ -11,20 +11,21 @@
 </head>
 <body>
 <div class="container width-container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center p-3">
         <h3 class="title">Категория</h3>
     </div>
-    <div><a href="/category/">Список</a></div>
-    <div class="d-flex mb-3 btn_box">
+    <div class="d-flex mb-3 justify-content-center">
         <form method="post" action="/category/">
-            <div>
-                <input type="hidden" name="id" value="${category != null && category.id != null ? category.id : ''}">
-                <label>Наименование
-                    <input type="text" name="name" value="${category != null && category.name  != null ? category.name : ''}">
-                </label>
+            <div class="p-3">
+                <input class="col" type="hidden" name="id"
+                       value="${category != null && category.id != null ? category.id : ''}">
+                <div>Наименование</div>
+                <input class="col form-control" type="text" name="name"
+                       value="${category != null && category.name  != null ? category.name : ''}">
             </div>
             <div>
-                <input type="submit" class="btn btn-primary" value="Сохранить">
+                <input type="submit" class="btn btn-primary m-1" value="Сохранить">
+                <a class="btn btn-primary" href="/category/">Список</a>
             </div>
         </form>
     </div>

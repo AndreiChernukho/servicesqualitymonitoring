@@ -11,27 +11,27 @@
 </head>
 <body>
 <div class="container width-container">
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center p-3">
         <h3 class="title">Список услуг</h3>
     </div>
-    <div><a href="/service/create/">Создать</a></div>
-    <div class="d-flex mb-3 btn_box">
+    <div class="d-flex justify-content-center"><a class="btn btn-primary" href="/service/create/">Создать</a></div>
+    <div class="d-flex justify-content-center">
         <table>
-            <tr>
-                <th>Наименование</th>
-                <th>Код</th>
-                <th>Действия</th>
+            <tr class="overflow-hidden">
+                <th class="col p-3">Наименование</th>
+                <th class="col p-3">Код</th>
+                <th class="col p-3">Действия</th>
             </tr>
             <c:forEach items="${onlineServices}" var="onlineService">
-                <tr>
-                    <td>${onlineService.name}</td>
-                    <td>${onlineService.code}</td>
-                    <td>
+                <tr class="overflow-hidden">
+                    <td class="col p-3">${onlineService.name}</td>
+                    <td class="col p-3">${onlineService.code}</td>
+                    <td class="col p-3">
                         <form method="GET" action="/service/${onlineService.id}">
-                            <input type="submit" value="Редактировать">
+                            <input class="btn btn-primary btn-sm" type="submit" value="Редактировать">
                         </form>
                         <form method="POST" action="/service/delete/${onlineService.id}">
-                            <input type="submit" value="Удалить">
+                            <input class="btn btn-primary btn-sm" type="submit" value="Удалить">
                         </form>
                     </td>
                 </tr>
