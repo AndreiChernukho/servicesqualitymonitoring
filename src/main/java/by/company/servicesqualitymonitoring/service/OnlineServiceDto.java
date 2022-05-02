@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ServiceDto {
+public class OnlineServiceDto {
 
     private Long id;
     private String name;

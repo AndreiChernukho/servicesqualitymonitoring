@@ -5,18 +5,18 @@ import by.company.servicesqualitymonitoring.rating.model.*;
 import by.company.servicesqualitymonitoring.category.CategoryMapper;
 import by.company.servicesqualitymonitoring.company.CompanyMapper;
 import by.company.servicesqualitymonitoring.rating.Rating;
-import by.company.servicesqualitymonitoring.service.ServiceMapper;
+import by.company.servicesqualitymonitoring.service.OnlineServiceMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {CategoryMapper.class, CompanyMapper.class, ServiceMapper.class})
+@Mapper(componentModel = "spring", uses = {CategoryMapper.class, CompanyMapper.class, OnlineServiceMapper.class})
 public interface RatingMapper {
 
     @Mapping(source = "categoryId", target = "category.id")
     @Mapping(source = "companyId", target = "company.id")
-    @Mapping(source = "serviceId", target = "service.id")
+    @Mapping(source = "serviceId", target = "onlineService.id")
     Rating convert(CreateRatingDto createRatingDto);
 
     RatingDto convert(Rating rating);

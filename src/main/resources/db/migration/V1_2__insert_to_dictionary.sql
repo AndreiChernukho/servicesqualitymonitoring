@@ -8,7 +8,7 @@ INSERT INTO company (name, unn) VALUES ('организация 2', '123456787')
 INSERT INTO company (name, unn) VALUES ('организация 3', '123456788');
 INSERT INTO company (name, unn) VALUES ('организация 4', '123456789');
 
-INSERT INTO service (name, code) VALUES ('услуга 1', '123');
-INSERT INTO service (name, code) VALUES ('услуга 2', '456');
-INSERT INTO service (name, code) VALUES ('услуга 3', '788');
-INSERT INTO service (name, code) VALUES ('услуга 4', '789');
+INSERT INTO online_service (name, code) VALUES ('услуга 1', '123');
+INSERT INTO online_service (name, code) VALUES ('услуга 2', '456');
+INSERT INTO online_service (name, code) VALUES ('услуга 3', '788');
+INSERT INTO online_service (name, code) VALUES ('услуга 4', '789');

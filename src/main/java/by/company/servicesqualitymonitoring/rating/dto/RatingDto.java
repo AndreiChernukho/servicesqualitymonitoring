@@ -2,7 +2,7 @@ package by.company.servicesqualitymonitoring.rating.dto;
 
 import by.company.servicesqualitymonitoring.category.CategoryDto;
 import by.company.servicesqualitymonitoring.company.CompanyDto;
-import by.company.servicesqualitymonitoring.service.ServiceDto;
+import by.company.servicesqualitymonitoring.service.OnlineServiceDto;
 import lombok.Data;
 import lombok.ToString;
 
@@ -16,7 +16,7 @@ public class RatingDto {
     private Integer rating;
     private CategoryDto category;
     private CompanyDto company;
-    private ServiceDto service;
+    private OnlineServiceDto onlineService;
     private String comment;
     private LocalDateTime creationDate;
 }

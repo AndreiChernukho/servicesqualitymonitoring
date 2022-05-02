@@ -4,7 +4,7 @@ import by.company.servicesqualitymonitoring.category.CategoryService;
 import by.company.servicesqualitymonitoring.company.CompanyService;
 import by.company.servicesqualitymonitoring.rating.model.*;
 import by.company.servicesqualitymonitoring.rating.mapper.RatingMapper;
-import by.company.servicesqualitymonitoring.service.ServiceService;
+import by.company.servicesqualitymonitoring.service.OnlineServiceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -27,17 +27,17 @@ public class RatingService {
     public final RatingMapper ratingMapper;
     public final CategoryService categoryService;
     public final CompanyService companyService;
-    public final ServiceService serviceService;
+    public final OnlineServiceService onlineServiceService;
 
     @Transactional
     public void save(Rating rating) {
         rating.setCategory(categoryService.get(rating.getCategory().getId()));
-        rating.setService(serviceService.get(rating.getService().getId()));
+        rating.setOnlineService(onlineServiceService.get(rating.getOnlineService().getId()));
         rating.setCompany(companyService.get(rating.getCompany().getId()));
         if (rating.getId() != null) {
             Rating old = ratingRepository.getById(rating.getId());
             old.setCategory(rating.getCategory());
-            old.setService(rating.getService());
+            old.setOnlineService(rating.getOnlineService());
             old.setCompany(rating.getCompany());
             old.setRating(rating.getRating());
             old.setComment(rating.getComment());
@@ -65,7 +65,7 @@ public class RatingService {
     @Transactional
     public List<AverageRating> getAverageRatings(RatingFilter filter) {
         Map<String, List<Rating>> ratingMap = findAllBy(filter).stream()
-                .collect(Collectors.groupingBy(rating -> rating.getService().getName()));
+                .collect(Collectors.groupingBy(rating -> rating.getOnlineService().getName()));
 
         List<AverageRating> results = new ArrayList<>();
         ratingMap.forEach((serviceName, ratings) -> {
@@ -124,7 +124,7 @@ public class RatingService {
     @Transactional
     public List<PeopleCount> getPeopleCount() {
         Map<String, List<Rating>> ratingMap = ratingRepository.findAll().stream()
-                .collect(Collectors.groupingBy(rating -> rating.getService().getName()));
+                .collect(Collectors.groupingBy(rating -> rating.getOnlineService().getName()));
         List<PeopleCount> peopleCounts = new ArrayList<>();
         ratingMap.forEach((serviceName, ratings) -> {
             PeopleCount result = new PeopleCount(serviceName, ratings.size());

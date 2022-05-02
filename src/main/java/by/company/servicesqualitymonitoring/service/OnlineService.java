@@ -8,7 +8,7 @@ import javax.persistence.*;
 @ToString
 @Data
 @Entity
-public class Service {
+public class OnlineService {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

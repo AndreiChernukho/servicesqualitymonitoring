@@ -31,7 +31,7 @@
                     <td>${ratingValues.get(rating.rating)}</td>
                     <td>${rating.category.name}</td>
                     <td>${rating.company.name}</td>
-                    <td>${rating.service.name}</td>
+                    <td>${rating.onlineService.name}</td>
                     <td>${rating.comment}</td>
                     <td>${rating.creationDate}</td>
                     <td>

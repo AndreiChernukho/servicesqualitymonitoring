@@ -51,8 +51,8 @@
             <div>
                 <label>Услуга
                     <form:select path="services" name="serviceId">
-                        <form:option value="${rating != null && rating.service != null ? rating.service.id : ''}">
-                            ${rating != null && rating.service != null ? rating.service.name : ''}
+                        <form:option value="${rating != null && rating.onlineService != null ? rating.onlineService.id : ''}">
+                            ${rating != null && rating.onlineService != null ? rating.onlineService.name : ''}
                         </form:option>
                         <form:options items="${services}" itemValue="id" itemLabel="name"/>
                     </form:select>

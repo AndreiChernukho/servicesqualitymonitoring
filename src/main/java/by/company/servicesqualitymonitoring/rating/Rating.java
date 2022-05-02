@@ -2,7 +2,7 @@ package by.company.servicesqualitymonitoring.rating;
 
 import by.company.servicesqualitymonitoring.company.Company;
 import by.company.servicesqualitymonitoring.category.Category;
-import by.company.servicesqualitymonitoring.service.Service;
+import by.company.servicesqualitymonitoring.service.OnlineService;
 import lombok.Data;
 import lombok.ToString;
 
@@ -23,7 +23,7 @@ public class Rating {
     private LocalDateTime creationDate = LocalDateTime.now();
 
     @ManyToOne
-    private Service service;
+    private OnlineService onlineService;
 
     @ManyToOne
     private Category category;

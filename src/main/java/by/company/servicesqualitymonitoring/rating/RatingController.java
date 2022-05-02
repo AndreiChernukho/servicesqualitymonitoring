@@ -6,8 +6,8 @@ import by.company.servicesqualitymonitoring.company.CompanyMapper;
 import by.company.servicesqualitymonitoring.company.CompanyService;
 import by.company.servicesqualitymonitoring.rating.dto.*;
 import by.company.servicesqualitymonitoring.rating.mapper.RatingMapper;
-import by.company.servicesqualitymonitoring.service.ServiceMapper;
-import by.company.servicesqualitymonitoring.service.ServiceService;
+import by.company.servicesqualitymonitoring.service.OnlineServiceMapper;
+import by.company.servicesqualitymonitoring.service.OnlineServiceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -33,11 +33,11 @@ public class RatingController {
     private final RatingService ratingService;
     private final CategoryService categoryService;
     private final CompanyService companyService;
-    private final ServiceService serviceService;
+    private final OnlineServiceService onlineServiceService;
     private final RatingMapper ratingMapper;
     private final CategoryMapper categoryMapper;
     private final CompanyMapper companyMapper;
-    private final ServiceMapper serviceMapper;
+    private final OnlineServiceMapper onlineServiceMapper;
 
     @GetMapping
     public ModelAndView getAll() {
@@ -58,7 +58,7 @@ public class RatingController {
         modelAndView.addObject("rating", ratingMapper.convert(rating));
         modelAndView.addObject("categories", categoryMapper.convert(categoryService.getAll()));
         modelAndView.addObject("companies", companyMapper.convert(companyService.getAll()));
-        modelAndView.addObject("services", serviceMapper.convert(serviceService.getAll()));
+        modelAndView.addObject("services", onlineServiceMapper.convert(onlineServiceService.getAll()));
         return modelAndView;
     }
 
@@ -68,7 +68,7 @@ public class RatingController {
         modelAndView.addObject("ratingValues", RATING_VALUES);
         modelAndView.addObject("categories", categoryMapper.convert(categoryService.getAll()));
         modelAndView.addObject("companies", companyMapper.convert(companyService.getAll()));
-        modelAndView.addObject("services", serviceMapper.convert(serviceService.getAll()));
+        modelAndView.addObject("services", onlineServiceMapper.convert(onlineServiceService.getAll()));
         return modelAndView;
     }
 
@@ -92,36 +92,4 @@ public class RatingController {
         ratingService.delete(id);
         return getAll();
     }
-
-//    @PostMapping("/average")
-//    public List<AverageRatingDto> getAverageRatings(
-//            @RequestBody(required = false) @Valid RatingFilterDto filterDto) {
-//
-//        log.info("Post '/average' request body: {}", filterDto);
-//        List<AverageRating> averageRatings = ratingService.getAverageRatings(ratingMapper.convertFilter(filterDto));
-//        return ratingMapper.convertAverageRating(averageRatings);
-//    }
-//
-//    @GetMapping("/people/count")
-//    public List<PeopleCountDto> getPeopleCount() {
-//        log.info("Get '/people/count'");
-//        return ratingMapper.convertPeopleCount(ratingService.getPeopleCount());
-//    }
-//
-//    @PostMapping("/people/satisfied")
-//    public List<PeopleSatisfiedDto> getPeopleSatisfied(
-//            @RequestBody(required = false) @Valid RatingFilterDto filterDto) {
-//
-//        log.info("Post '/people/satisfied' request body: {}", filterDto);
-//        List<PeopleSatisfied> peopleSatisfied =
-//                ratingService.getPeopleSatisfied(ratingMapper.convertFilter(filterDto));
-//        return ratingMapper.convertPeopleSatisfied(peopleSatisfied);
-//    }
-//
-//    @PostMapping("/dynamics")
-//    public List<DynamicsDto> getDynamics(@RequestBody RatingFilterDto filterDto) {
-//        log.info("Post '/dynamics' request body: {}", filterDto);
-//        List<Dynamics> ratings = ratingService.getDynamics(ratingMapper.convertFilter(filterDto));
-//        return ratingMapper.convertDynamics(ratings);
-//    }
 }
