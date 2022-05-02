@@ -9,5 +9,5 @@ public class CompanyDto {
 
     private Long id;
     private String name;
-    private String unn;
+    private Integer unn;
 }

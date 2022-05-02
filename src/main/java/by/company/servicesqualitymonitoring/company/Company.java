@@ -15,5 +15,5 @@ public class Company {
     @Column(name = "id", nullable = false, columnDefinition = "bigserial")
     private Long id;
     private String name;
-    private String unn;
+    private Integer unn;
 }

@@ -1,7 +1,5 @@
 package by.company.servicesqualitymonitoring.company;
 
-import by.company.servicesqualitymonitoring.category.Category;
-import by.company.servicesqualitymonitoring.category.CategoryDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;
