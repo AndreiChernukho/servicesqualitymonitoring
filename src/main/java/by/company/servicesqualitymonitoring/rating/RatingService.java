@@ -31,20 +31,13 @@ public class RatingService {
 
     @Transactional
     public void save(Rating rating) {
+        Rating current = rating.getId() != null ? ratingRepository.getById(rating.getId()) : rating;
         rating.setCategory(categoryService.get(rating.getCategory().getId()));
         rating.setOnlineService(onlineServiceService.get(rating.getOnlineService().getId()));
         rating.setCompany(companyService.get(rating.getCompany().getId()));
-        if (rating.getId() != null) {
-            Rating old = ratingRepository.getById(rating.getId());
-            old.setCategory(rating.getCategory());
-            old.setOnlineService(rating.getOnlineService());
-            old.setCompany(rating.getCompany());
-            old.setRating(rating.getRating());
-            old.setComment(rating.getComment());
-            ratingRepository.save(old);
-        } else {
-            ratingRepository.save(rating);
-        }
+        current.setRating(rating.getRating());
+        current.setComment(rating.getComment());
+        ratingRepository.save(current);
     }
 
     @Transactional

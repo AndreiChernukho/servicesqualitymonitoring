@@ -24,7 +24,7 @@ public class OnlineServiceController {
         log.info("Get '/'");
         ModelAndView modelAndView = new ModelAndView("onlineServices");
         List<OnlineService> onlineServices = onlineServiceService.getAll();
-        modelAndView.addObject("onlineServices", onlineServiceMapper.convert(onlineServices));
+        modelAndView.addObject("onlineServices", onlineServiceMapper.convertBoToDto(onlineServices));
         return modelAndView;
     }
 
@@ -33,7 +33,7 @@ public class OnlineServiceController {
         log.info("Post '/{}'", id);
         ModelAndView modelAndView = new ModelAndView("onlineService");
         OnlineService onlineService = onlineServiceService.get(id);
-        modelAndView.addObject("onlineService", onlineServiceMapper.convert(onlineService));
+        modelAndView.addObject("onlineService", onlineServiceMapper.convertBoToDto(onlineService));
         return modelAndView;
     }
 
@@ -45,21 +45,21 @@ public class OnlineServiceController {
     @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ModelAndView create(@Valid OnlineServiceDto onlineServiceDto) {
         log.info("Post '/' request body: {}", onlineServiceDto);
-        onlineServiceService.save(onlineServiceMapper.convert(onlineServiceDto));
-        return getAll();
+        onlineServiceService.save(onlineServiceMapper.convertDtoToBo(onlineServiceDto));
+        return new ModelAndView("redirect:/service");
     }
 
     @PostMapping("/edit")
     public ModelAndView edit(@RequestBody @Valid OnlineServiceDto onlineServiceDto) {
         log.info("Put '/' request body: {}", onlineServiceDto);
-        onlineServiceService.save(onlineServiceMapper.convert(onlineServiceDto));
-        return getAll();
+        onlineServiceService.save(onlineServiceMapper.convertDtoToBo(onlineServiceDto));
+        return new ModelAndView("redirect:/service");
     }
 
     @PostMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
         log.info("Post '/ {}' ", id);
         onlineServiceService.delete(id);
-        return getAll();
+        return new ModelAndView("redirect:/service");
     }
 }

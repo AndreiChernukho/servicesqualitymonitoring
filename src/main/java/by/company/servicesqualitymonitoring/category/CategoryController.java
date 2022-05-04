@@ -28,7 +28,7 @@ public class CategoryController {
         log.info("Get '/'");
         ModelAndView modelAndView = new ModelAndView("categories");
         List<Category> categories = categoryService.getAll();
-        modelAndView.addObject("categories", categoryMapper.convert(categories));
+        modelAndView.addObject("categories", categoryMapper.convertBoToDto(categories));
         return modelAndView;
     }
 
@@ -37,7 +37,7 @@ public class CategoryController {
         log.info("Post '/{}'", id);
         ModelAndView modelAndView = new ModelAndView("category");
         Category category = categoryService.get(id);
-        modelAndView.addObject("category", categoryMapper.convert(category));
+        modelAndView.addObject("category", categoryMapper.convertBoToDto(category));
         return modelAndView;
     }
 
@@ -49,21 +49,21 @@ public class CategoryController {
     @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ModelAndView create(@Valid CategoryDto categoryDto) {
         log.info("Post '/' request body: {}", categoryDto);
-        categoryService.save(categoryMapper.convert(categoryDto));
-        return getAll();
+        categoryService.save(categoryMapper.convertDtoToBo(categoryDto));
+        return new ModelAndView("redirect:/category");
     }
 
     @PostMapping("/edit")
     public ModelAndView edit(@RequestBody @Valid CategoryDto categoryDto) {
         log.info("Put '/' request body: {}", categoryDto);
-        categoryService.save(categoryMapper.convert(categoryDto));
-        return getAll();
+        categoryService.save(categoryMapper.convertDtoToBo(categoryDto));
+        return new ModelAndView("redirect:/category");
     }
 
     @PostMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
         log.info("Post '/ {}' ", id);
         categoryService.delete(id);
-        return getAll();
+        return new ModelAndView("redirect:/category");
     }
 }

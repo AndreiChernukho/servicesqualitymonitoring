@@ -1,15 +1,8 @@
 package by.company.servicesqualitymonitoring.service;
 
+import by.company.servicesqualitymonitoring.MonitoringMapper;
 import org.mapstruct.Mapper;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring")
-public interface OnlineServiceMapper {
-
-    OnlineService convert(OnlineServiceDto onlineServiceDto);
-
-    OnlineServiceDto convert(OnlineService onlineService);
-
-    List<OnlineServiceDto> convert(List<OnlineService> onlineService);
+public interface OnlineServiceMapper extends MonitoringMapper<OnlineService, OnlineServiceDto> {
 }

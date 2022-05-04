@@ -2,7 +2,7 @@ package by.company.servicesqualitymonitoring.rating.report;
 
 import by.company.servicesqualitymonitoring.rating.RatingService;
 import by.company.servicesqualitymonitoring.rating.dto.RatingFilterDto;
-import by.company.servicesqualitymonitoring.rating.mapper.RatingMapper;
+import by.company.servicesqualitymonitoring.rating.mapper.RatingFilterMapper;
 import by.company.servicesqualitymonitoring.rating.model.*;
 import by.company.servicesqualitymonitoring.rating.report.converter.*;
 import by.company.servicesqualitymonitoring.report.ReportService;
@@ -32,14 +32,14 @@ public class RatingWordReportController {
     private final PeopleSatisfiedConverter peopleSatisfiedConverter;
     private final DynamicsConverter dynamicsConverter;
     private final CompanyRatingConverter companyRatingConverter;
-    private final RatingMapper ratingMapper;
+    private final RatingFilterMapper ratingFilterMapper;
 
     @GetMapping
     public ResponseEntity<Resource> getCompanyRating(
             @RequestBody(required = false) @Valid RatingFilterDto filterDto) throws IOException {
 
         log.info("Get '/company'");
-        List<CompanyRating> ratings = ratingService.getCompanyRatings(ratingMapper.convertFilter(filterDto));
+        List<CompanyRating> ratings = ratingService.getCompanyRatings(ratingFilterMapper.convertDtoToBo(filterDto));
         String title = "Оценки государственных органов и организаций";
         Resource resource = wordService.generate(companyRatingConverter.convert(ratings), title);
         return ResponseEntity.ok()
@@ -54,7 +54,7 @@ public class RatingWordReportController {
             @RequestBody(required = false) @Valid RatingFilterDto filterDto) throws IOException {
 
         log.info("Post '/averageRatings' request body: {}", filterDto);
-        List<AverageRating> results = ratingService.getAverageRatings(ratingMapper.convertFilter(filterDto));
+        List<AverageRating> results = ratingService.getAverageRatings(ratingFilterMapper.convertDtoToBo(filterDto));
         String title = "Средние оценки по услугам";
         Resource resource = wordService.generate(averageRatingsConverter.convert(results), title);
         return ResponseEntity.ok()
@@ -84,7 +84,7 @@ public class RatingWordReportController {
 
         log.info("Post '/people/satisfied' request body: {}", filterDto);
         List<PeopleSatisfied> peopleSatisfied =
-                ratingService.getPeopleSatisfied(ratingMapper.convertFilter(filterDto));
+                ratingService.getPeopleSatisfied(ratingFilterMapper.convertDtoToBo(filterDto));
         String title = "Удовлетворенность граждан";
         Resource resource = wordService.generate(peopleSatisfiedConverter.convert(peopleSatisfied), title);
         return ResponseEntity.ok()
@@ -99,7 +99,7 @@ public class RatingWordReportController {
             @RequestBody @Valid RatingFilterDto filterDto) throws IOException {
 
         log.info("Post '/dynamic' request body: {}", filterDto);
-        List<Dynamics> dynamics = ratingService.getDynamics(ratingMapper.convertFilter(filterDto));
+        List<Dynamics> dynamics = ratingService.getDynamics(ratingFilterMapper.convertDtoToBo(filterDto));
         String title = "Динамика изменения оценок";
         Resource resource = wordService.generate(dynamicsConverter.convert(dynamics), title);
         return ResponseEntity.ok()

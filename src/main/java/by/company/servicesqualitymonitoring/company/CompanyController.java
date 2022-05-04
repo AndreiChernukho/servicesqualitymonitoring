@@ -24,7 +24,7 @@ public class CompanyController {
         log.info("Get '/'");
         ModelAndView modelAndView = new ModelAndView("companies");
         List<Company> companies = companyService.getAll();
-        modelAndView.addObject("companies", companyMapper.convert(companies));
+        modelAndView.addObject("companies", companyMapper.convertBoToDto(companies));
         return modelAndView;
     }
 
@@ -33,7 +33,7 @@ public class CompanyController {
         log.info("Post '/{}'", id);
         ModelAndView modelAndView = new ModelAndView("company");
         Company company = companyService.get(id);
-        modelAndView.addObject("company", companyMapper.convert(company));
+        modelAndView.addObject("company", companyMapper.convertBoToDto(company));
         return modelAndView;
     }
 
@@ -45,21 +45,21 @@ public class CompanyController {
     @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ModelAndView create(@Valid CompanyDto companyDto) {
         log.info("Post '/' request body: {}", companyDto);
-        companyService.save(companyMapper.convert(companyDto));
-        return getAll();
+        companyService.save(companyMapper.convertDtoToBo(companyDto));
+        return new ModelAndView("redirect:/company");
     }
 
     @PostMapping("/edit")
     public ModelAndView edit(@RequestBody @Valid CompanyDto companyDto) {
         log.info("Put '/' request body: {}", companyDto);
-        companyService.save(companyMapper.convert(companyDto));
-        return getAll();
+        companyService.save(companyMapper.convertDtoToBo(companyDto));
+        return new ModelAndView("redirect:/company");
     }
 
     @PostMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
         log.info("Post '/ {}' ", id);
         companyService.delete(id);
-        return getAll();
+        return new ModelAndView("redirect:/company");
     }
 }

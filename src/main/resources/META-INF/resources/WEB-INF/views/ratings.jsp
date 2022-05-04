@@ -40,7 +40,7 @@
                     <td class="col p-3">${rating.onlineService.name}</td>
                     <td class="col p-3">${rating.comment}</td>
                     <td class="col p-3">${rating.creationDate}</td>
-                    <td  class="col p-3">
+                    <td class="col p-3">
                         <form method="GET" action="/rating/${rating.id}">
                             <input class="btn btn-primary btn-sm" type="submit" value="Редактировать">
                         </form>

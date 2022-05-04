@@ -44,7 +44,7 @@ public class RatingController {
         log.info("Get '/'");
         ModelAndView modelAndView = new ModelAndView("ratings");
         List<Rating> ratings = ratingService.getAll();
-        modelAndView.addObject("ratings", ratingMapper.convert(ratings));
+        modelAndView.addObject("ratings", ratingMapper.convertBoToDto(ratings));
         modelAndView.addObject("ratingValues", RATING_VALUES);
         return modelAndView;
     }
@@ -55,10 +55,10 @@ public class RatingController {
         ModelAndView modelAndView = new ModelAndView("rating");
         Rating rating = ratingService.get(id);
         modelAndView.addObject("ratingValues", RATING_VALUES);
-        modelAndView.addObject("rating", ratingMapper.convert(rating));
-        modelAndView.addObject("categories", categoryMapper.convert(categoryService.getAll()));
-        modelAndView.addObject("companies", companyMapper.convert(companyService.getAll()));
-        modelAndView.addObject("services", onlineServiceMapper.convert(onlineServiceService.getAll()));
+        modelAndView.addObject("rating", ratingMapper.convertBoToDto(rating));
+        modelAndView.addObject("categories", categoryMapper.convertBoToDto(categoryService.getAll()));
+        modelAndView.addObject("companies", companyMapper.convertBoToDto(companyService.getAll()));
+        modelAndView.addObject("services", onlineServiceMapper.convertBoToDto(onlineServiceService.getAll()));
         return modelAndView;
     }
 
@@ -66,30 +66,30 @@ public class RatingController {
     public ModelAndView create() {
         ModelAndView modelAndView = new ModelAndView("rating");
         modelAndView.addObject("ratingValues", RATING_VALUES);
-        modelAndView.addObject("categories", categoryMapper.convert(categoryService.getAll()));
-        modelAndView.addObject("companies", companyMapper.convert(companyService.getAll()));
-        modelAndView.addObject("services", onlineServiceMapper.convert(onlineServiceService.getAll()));
+        modelAndView.addObject("categories", categoryMapper.convertBoToDto(categoryService.getAll()));
+        modelAndView.addObject("companies", companyMapper.convertBoToDto(companyService.getAll()));
+        modelAndView.addObject("services", onlineServiceMapper.convertBoToDto(onlineServiceService.getAll()));
         return modelAndView;
     }
 
     @PostMapping(consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ModelAndView create(@Valid CreateRatingDto createRatingDto) {
         log.info("Post '/' request body: {}", createRatingDto);
-        ratingService.save(ratingMapper.convert(createRatingDto));
-        return getAll();
+        ratingService.save(ratingMapper.convertDtoToBo(createRatingDto));
+        return new ModelAndView("redirect:/rating");
     }
 
     @PostMapping("/edit")
     public ModelAndView edit(@RequestBody @Valid CreateRatingDto createRatingDto) {
         log.info("Put '/' request body: {}", createRatingDto);
-        ratingService.save(ratingMapper.convert(createRatingDto));
-        return getAll();
+        ratingService.save(ratingMapper.convertDtoToBo(createRatingDto));
+        return new ModelAndView("redirect:/rating");
     }
 
     @PostMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
         log.info("Post '/ {}' ", id);
         ratingService.delete(id);
-        return getAll();
+        return new ModelAndView("redirect:/rating");
     }
 }
