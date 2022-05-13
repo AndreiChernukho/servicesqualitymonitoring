@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+
+  postgres:
+    container_name: postgres
+    image: library/postgres:13.5
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5435:5432"
+    volumes:
+      - "./config/init.sql:/docker-entrypoint-initdb.d/init.sql"
+
+  services-quality-monitoring:
+    build: ./
+    container_name: services-quality-monitoring
+    hostname: services-quality-monitoring
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
